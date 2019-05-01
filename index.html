@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ethymap</title>
+</head>
+<body>
+	<!-- <img id="map" src="map.svg" width="72%" height="70%"> -->
+
+        <object data="map.svg" type="image/svg+xml"
+         id="map" width="72%" height="100%"></object>
+</body>
+<script type="text/javascript">
+let svgNS="http://www.w3.org/2000/svg"
+function createText(p)
+{
+    var t = document.createElementNS(svgNS, "text");
+    var b = p.getBBox();
+    t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
+    t.textContent = "a";
+    t.setAttribute("fill", "red");
+    t.setAttribute("font-size", "14");
+    p.parentNode.insertBefore(t, p.nextSibling);
+}
+
+
+window.onload=function () {
+	svg = document.getElementById("map").contentDocument;
+    var delta = svg.getElementById("Tunisie");
+    delta.addEventListener("mousedown", function(){ alert('hello world!')}, false);
+    for(country of svg.getElementsByTagName("path")){
+    	country.addEventListener("mousedown", (x)=> createText(x.target))
+    }
+};
+
+</script>
+</html>
