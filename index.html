@@ -13,12 +13,17 @@
 let svgNS="http://www.w3.org/2000/svg"
 function createText(p)
 {
+	text=p.id
     var t = document.createElementNS(svgNS, "text");
     var b = p.getBBox();
-    t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
-    t.textContent = "a";
-    t.setAttribute("fill", "red");
-    t.setAttribute("font-size", "14");
+    let x_shift = b.x + b.width/(text.length-2)
+    t.setAttribute("transform", "translate(" + x_shift + " " + (b.y + b.height/2) + ")");
+    t.textContent = text;
+    t.setAttribute("fill", "black");
+    size=3 * (100+b.width)/150
+
+    t.setAttribute("font-size", size);
+    t.setAttribute("font-family","Sans-Serif")
     p.parentNode.insertBefore(t, p.nextSibling);
 }
 
